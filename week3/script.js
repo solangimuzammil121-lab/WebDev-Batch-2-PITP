@@ -1,2 +1,5 @@
-let x = 2;
-x > 1 && x< 3
+const menuBtn = document.getElementById('menu-toggle');
+
+const menuBtn = document.querySelector('.nav-list');
+
+

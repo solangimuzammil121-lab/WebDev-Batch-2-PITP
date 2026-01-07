@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    <div class="quiz-container">
+        <h1>JavaSrcipt Basics Quiz</h1>
+
+        <form id="question-book">
+            <p>1. Which method is used to select multiple elements?</p>
+            <label><input type="radio" name="q1" value="A"> queryselector()</label><br>
+            <label><input type="radio" name="q1" value="B"> getElementById()</label><br>
+            <label><input type="radio" name="q1" value="C"> queryselectorAll()</label>
+            </div>
+
+            <div class="question-book">
+                <p>2. How do you start a FOR loop?</p>
+                <label><input type="radio" name="q2" value="A"> for (i = 0; i <= 5; i++)</label><br>
+                <label><input type="radio" name="q2" value="B"> for ( i <= 5; i++)</label><br>
+                <label><input type="radio" name="q2" value="C"> loop (i = 0; i <= 5)</label>
+            </div>
+
+            <div class="question-block">
+                <p>3. What allows you to embed variables in string using backticks?
+                </p>
+                <label><input type="radio" name="q3" value="A"> String Concatenation </label><br>
+                <label><input type="radio" name="q3" value="B"> Template Literals</label><br>
+                 <label><input type="radio" name="q3" value="C"> HTML Elements</label>
+            </div>
+
+            <button type="button" onclick="CalculateScore()">Submit Quiz</button>
+        </form>
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

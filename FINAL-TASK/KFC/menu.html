@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Menu | Kentucky Fried Chicken</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1200px-KFC_logo.svg.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #e4002b;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                 <img src="KFC_logo.svg.png" alt="KFC Logo" height="60" class="me-2">
+                KFC
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="menu.html">Our Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reservation.html">Order Online</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Header -->
+    <section class="menu-header py-5 mt-5" style="background-color: #e4002b;">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold text-white">KFC Menu</h1>
+            <p class="lead text-white">Explore our famous chicken and sides</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="input-group mb-4">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search menu items...">
+                    <button class="btn btn-warning" onclick="searchMenu()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="text-center mb-5">
+                    <button class="btn btn-outline-danger me-2 mb-2" onclick="filterMenu('all')">All Items</button>
+                    <button class="btn btn-outline-danger me-2 mb-2" onclick="filterMenu('burgers')">Burgers</button>
+                    <button class="btn btn-outline-danger me-2 mb-2" onclick="filterMenu('buckets')">Buckets</button>
+                    <button class="btn btn-outline-danger me-2 mb-2" onclick="filterMenu('sides')">Sides</button>
+                    <button class="btn btn-outline-danger me-2 mb-2" onclick="filterMenu('desserts')">Desserts</button>
+                    <button class="btn btn-outline-danger mb-2" onclick="filterMenu('drinks')">Drinks</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Items (Dynamically Generated) -->
+    <section class="container py-4">
+        <div class="row" id="menuContainer">
+            <!-- Menu items will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Nutritional Info -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="mb-4" style="color: #e4002b;">Nutritional Information</h3>
+                    <p>We believe in transparency about what goes into our food. All nutritional information is based on standard product formulations and serving sizes.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-danger me-2"></i> Calorie counts available for all items</li>
+                        <li><i class="fas fa-check-circle text-danger me-2"></i> Allergen information provided</li>
+                        <li><i class="fas fa-check-circle text-danger me-2"></i> Vegetarian options marked clearly</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline-danger mt-2">Download Full Nutrition PDF</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9" class="img-fluid rounded" alt="Nutrition Info">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white py-5" style="background-color: #1a1a1a;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-warning">Opening Hours</h5>
+                    <ul class="list-unstyled">
+                        <li>Monday - Thursday: 10AM - 11PM</li>
+                        <li>Friday - Saturday: 10AM - 12AM</li>
+                        <li>Sunday: 11AM - 10PM</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-warning">Contact Us</h5>
+                    <p>1441 Gardiner Lane<br>Louisville, KY 40213, USA</p>
+                    <p>Phone: 03003003000CALL-KFCs</p>
+                    <p>Email: solangimuzammil121@gmail.com</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-warning">Follow KFC</h5>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1200px-KFC_logo.svg.png" alt="KFC Logo" height="50">
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-secondary">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center mb-0">&copy; 2026 KFC Corporation. All rights reserved. 
+                        <span class="mx-2">|</span>
+                        <a href="#" class="text-warning text-decoration-none">Privacy Policy</a>
+                        <span class="mx-2">|</span>
+                        <a href="#" class="text-warning text-decoration-none">Terms of Service</a>
+                        <span class="mx-2">|</span>
+                        <a href="#" class="text-warning text-decoration-none">Nutrition Information</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

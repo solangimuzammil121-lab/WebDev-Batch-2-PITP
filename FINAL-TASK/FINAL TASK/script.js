@@ -1,103 +1,87 @@
-// Menu Data Array
-const menuItems = [
-    {
-        id: 1,
-        name: "Truffle Arancini",
-        description: "Crispy risotto balls with black truffle and mozzarella",
-        price: 14.99,
-        category: "starters",
-        image: "https://images.unsplash.com/photo-1563379091339-03246963d9d6"
-    },
-    {
-        id: 2,
-        name: "Bruschetta Trio",
-        description: "Toasted bread with tomato, mushroom, and pesto toppings",
-        price: 12.99,
-        category: "starters",
-        image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f"
-    },
-    {
-        id: 3,
-        name: "Calamari Fritti",
-        description: "Crispy fried squid with lemon aioli",
-        price: 16.99,
-        category: "starters",
-        image: "https://images.unsplash.com/photo-1551024506-0bccd828d307"
-    },
-    {
-        id: 4,
-        name: "Herb-Crusted Salmon",
-        description: "Atlantic salmon with dill sauce and roasted potatoes",
-        price: 28.99,
-        category: "mains",
-        image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288"
-    },
-    {
-        id: 5,
-        name: "Filet Mignon",
-        description: "8oz beef tenderloin with red wine reduction and vegetables",
-        price: 36.99,
-        category: "mains",
-        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d"
-    },
-    {
-        id: 6,
-        name: "Mushroom Risotto",
-        description: "Creamy arborio rice with wild mushrooms and parmesan",
-        price: 22.99,
-        category: "mains",
-        image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371"
-    },
-    {
-        id: 7,
-        name: "Tiramisu",
-        description: "Classic Italian dessert with mascarpone and coffee",
-        price: 10.99,
-        category: "desserts",
-        image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e"
-    },
-    {
-        id: 8,
-        name: "Chocolate Soufflé",
-        description: "Warm chocolate dessert with vanilla ice cream",
-        price: 12.99,
-        category: "desserts",
-        image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb"
-    },
-    {
-        id: 9,
-        name: "Berry Pavlova",
-        description: "Meringue with fresh berries and whipped cream",
-        price: 11.99,
-        category: "desserts",
-        image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187"
-    },
-    {
-        id: 10,
-        name: "Craft Cocktails",
-        description: "Seasonal signature cocktails",
-        price: 14.99,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b"
-    },
-    {
-        id: 11,
-        name: "Wine Selection",
-        description: "Curated local and international wines",
-        price: 9.99,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb"
-    },
-    {
-        id: 12,
-        name: "Fresh Juices",
-        description: "Daily pressed fruit and vegetable juices",
-        price: 6.99,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba"
-    }
-];
+// currency.js - PKR Currency Utilities
 
+class PKRCurrency {
+    constructor() {
+        this.symbol = 'Rs';
+        this.decimalSeparator = '.';
+        this.thousandsSeparator = ',';
+    }
+    
+    format(amount, showSymbol = true) {
+        const formatted = amount.toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandsSeparator);
+        
+        return showSymbol ? `${this.symbol} ${formatted}` : formatted;
+    }
+    
+    parse(formattedString) {
+        const numberString = formattedString
+            .replace(this.symbol, '')
+            .replace(new RegExp(`\\${this.thousandsSeparator}`, 'g'), '');
+        
+        return parseInt(numberString);
+    }
+    
+    convertFromUSD(usdAmount) {
+        const exchangeRates = {
+            'USD': 280,
+            'EUR': 305,
+            'GBP': 355,
+            'AED': 76,
+            'SAR': 75
+        };
+        
+        // You can fetch live rates from an API
+        // For now using fixed rates
+        return Math.round(usdAmount * exchangeRates['USD']);
+    }
+    
+    formatForDisplay(amount) {
+        if (amount >= 1000000) {
+            return `${this.symbol} ${(amount / 1000000).toFixed(1)}M`;
+        } else if (amount >= 1000) {
+            return `${this.symbol} ${(amount / 1000).toFixed(1)}K`;
+        }
+        return this.format(amount);
+    }
+    
+    calculateTax(amount, taxRate = 0.13) {
+        return Math.round(amount * taxRate);
+    }
+    
+    calculateDelivery(amount) {
+        if (amount === 0) return 0;
+        if (amount < 500) return 200;
+        if (amount < 2000) return 150;
+        if (amount < 5000) return 100;
+        return 0; // Free delivery for large orders
+    }
+}
+
+// Export for use in other files
+const pkrCurrency = new PKRCurrency();
+
+// Global helper function
+function formatPricePKR(amount) {
+    return pkrCurrency.format(amount);
+}
+
+// Auto-convert all USD prices on page
+function convertAllPricesToPKR() {
+    const elements = document.querySelectorAll('[data-price-usd]');
+    elements.forEach(element => {
+        const usdPrice = parseFloat(element.getAttribute('data-price-usd'));
+        if (!isNaN(usdPrice)) {
+            const pkrPrice = pkrCurrency.convertFromUSD(usdPrice);
+            element.textContent = pkrCurrency.format(pkrPrice);
+        }
+    });
+}
+
+// Initialize when page loads
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', convertAllPricesToPKR);
+}
 // DOM Elements
 let menuContainer = document.getElementById('menuContainer');
 let searchInput = document.getElementById('searchInput');
